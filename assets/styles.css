@@ -676,3 +676,81 @@ h1 em, h2 em, h3 em { font-weight: 600; color: var(--brass-text); }
 .dine:nth-child(2) .media { transition-delay: .1s; }
 .dine:nth-child(3) .media { transition-delay: .2s; }
 .dine:nth-child(4) .media { transition-delay: .3s; }
+
+/* ================= Phone refinements ================= */
+html, body { overflow-x: clip; }
+/* Unveil: the zoomed image must not widen the page before it is revealed */
+.unveil { overflow: hidden; }
+img.unveil:not(.in) { transform: none; }
+
+@media (max-width: 860px) {
+  /* Hero: text sits lower, clear of the booking card */
+  .hero-inner { padding-block: calc(var(--header-h) + 3rem) 5.5rem; gap: 1.1rem; }
+  .page-hero .hero-inner { padding-bottom: 3rem; }
+  .page-hero { min-height: 70vh; }
+  .hero .lead { font-size: 1.05rem; }
+
+  /* Booking card + benefits as a tidy 2 × 2 list */
+  .booking-note { display: grid; grid-template-columns: 1fr 1fr; gap: .45rem 1rem; font-size: .8rem; padding-top: 1rem; }
+
+  /* Rooms: swipe instead of arrow buttons */
+  .rail-nav { display: none; }
+  .rail { grid-auto-columns: 78%; gap: 1rem; }
+  .room-card .media { aspect-ratio: 4 / 5; }
+
+  /* Quote block */
+  .quote-body { gap: 1.4rem; padding-block: 3.5rem 4rem; }
+  .quote-body blockquote { font-size: 1.45rem; }
+  .quote-body blockquote::before { font-size: 2.6em; }
+
+  /* Section headings with their side link: stack neatly */
+  .section-head { flex-direction: column; align-items: flex-start; gap: 1.25rem; margin-bottom: 2.25rem; }
+
+  /* Lage: shorter photo, address card overlaps it slightly */
+  .location-media img { aspect-ratio: 4 / 3; }
+  .address-card { position: relative; margin: -2.5rem 1rem 0; }
+  .board-row { gap: 1rem; padding: .9rem 0; }
+  .board-row .km, .board-row .min { min-width: 3.6rem; font-size: .88rem; }
+
+  /* Rooms page: compact galleries and sticky category bar */
+  .room-gallery { grid-template-columns: 1fr 1fr; }
+  .room-gallery .main { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 4 / 3; }
+  .room + .room { margin-top: 4.5rem; }
+  .subnav ul { gap: 1.4rem; }
+
+  /* Split blocks (Genuss / Das Hotel): image a bit shorter */
+  .split-media img { aspect-ratio: 4 / 3; }
+  .split + .split { margin-top: 4.5rem; }
+
+  /* Timeline: two columns on phones */
+  .timeline { grid-template-columns: 1fr 1fr; column-gap: 1rem; }
+  .timeline li { padding: 1.25rem 0; }
+  .timeline .year { font-size: 1.9rem; }
+
+  /* Benefits / facts spacing */
+  .facts { gap: 1.25rem 1.5rem; }
+  .cta-band h2 { font-size: 2rem; }
+}
+@media (max-width: 420px) {
+  .booking-note { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.5rem; }
+}
+
+/* Phone refinements, round 2 */
+/* Room rail: first card keeps the page margin when snapping */
+.rail { scroll-padding-inline: var(--gutter); }
+/* Quote mark: a short brass rule instead of the oversized „ glyph */
+.quote-body blockquote::before { content: ""; display: block; width: 48px; height: 1px; background: var(--brass-soft); margin-bottom: 1.6rem; font-size: inherit; line-height: 0; }
+/* Key/value lists: one continuous line per row */
+.kv { column-gap: 0; }
+.kv dt { padding-right: 1.5rem; }
+/* Phone numbers never break */
+a[href^="tel:"] { white-space: nowrap; }
+@media (max-width: 860px) {
+  /* Category bar: soft fade shows there is more to swipe */
+  .subnav ul { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); padding-right: 2rem; }
+  /* Comparison table: feature column stays visible while swiping */
+  .compare { min-width: 640px; font-size: .88rem; }
+  .compare tbody th, .compare thead th:first-child { position: sticky; left: 0; background: var(--paper-2); z-index: 1; width: 7.5rem; padding-right: .75rem; }
+  .table-wrap::after { content: "← Zum Vergleichen wischen →"; display: block; text-align: center; font-size: .75rem; letter-spacing: .1em; color: var(--ink-soft); padding-top: 1rem; position: sticky; left: 0; width: calc(100vw - 2 * var(--gutter)); }
+}
